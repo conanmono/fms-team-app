@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "skills": {
+    "on-boarding-project": {
+      "source": "codingthailand/my-agent-skills",
+      "commit": "fdbebd76c84a1686e0ae128078d20b98de2544aa",
+      "sourceType": "github",
+      "skillPath": "skills/on-boarding-project/SKILL.md",
+      "computedHash": "1b0b8e640a28e4455033b70e4275e838af70457fd6d653561499cd41b75bb58c"
+    },
+    "setup-vitest-nextjs": {
+      "source": "codingthailand/my-agent-skills",
+      "commit": "fdbebd76c84a1686e0ae128078d20b98de2544aa",
+      "sourceType": "github",
+      "skillPath": "skills/setup-vitest-nextjs/SKILL.md",
+      "computedHash": "036958c366e0a1f55787565fcfaf8002ea3747e7ff50f2c9bcba6d162a05c7e1"
+    }
+  }
+}
