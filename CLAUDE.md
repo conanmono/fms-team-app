@@ -24,3 +24,7 @@ No test framework is configured yet.
 - `next.config.ts` enables `cacheComponents`, `partialPrefetching`, and `experimental.agentFeedback`. With Cache Components on, data fetching/caching follows the new model (`"use cache"`, Suspense boundaries for dynamic data) — check the bundled docs before adding fetches or route segment config.
 - Tailwind CSS v4 is wired through a Turbopack loader rule (`@tailwindcss/turbopack` on `*.css`), not PostCSS — there is no `postcss.config` or `tailwind.config`. Theme tokens are defined in `src/app/globals.css` via `@theme inline` and CSS variables (light/dark via `prefers-color-scheme`).
 - Layout uses the global `LayoutProps<"/">` type helper (generated route types) and `next/font/google` Geist fonts exposed as CSS variables.
+
+## Rules
+
+Team conventions are in `fms-team-app/.claude/rules/`. The following are the most important: `code-style.md` and `git.md` (commit messages, PRs, branches), `next.md` (Next.js conventions), `tailwind.md` (Tailwind CSS conventions). Read them before contributing.
