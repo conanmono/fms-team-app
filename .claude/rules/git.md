@@ -1,5 +1,8 @@
 # Git workflow (ใช้กับทุกงาน)
 
+## Branch
+- ห้าม commit โดยตรงเข้าที่ main ให้แตก branch ก่อนเริ่มงาน เช่น `feat/<เรื่อง​>`, `fix/<เรื่อง>`
+
 ## Commit message
 
   - ใช้ conventional commit message format : `<type>(<scope>): <subject>`
