@@ -1,8 +1,9 @@
 # Git workflow (ใช้กับทุกงาน)
 
 ## Branch
-- ห้าม commit โดยตรงเข้าที่ main ให้แตก branch ก่อนเริ่มงาน เช่น `feat/<เรื่อง​>`, `fix/<เรื่อง>`
-
+  - ห้าม commit โดยตรงเข้าที่ main ให้แตก branch ก่อนเริ่มงาน เช่น `feat/<เรื่อง​>`, `fix/<เรื่อง>`
+  - เมื่อทำงานเสร็จแล้วให้สร้าง pull request เพื่อ merge เข้ากับ main
+  - เมื่อ merge เข้ากับ main แล้วให้ลบ branch ทิ้ง ในเครื่องและ remote
 ## Commit message
 
   - ใช้ conventional commit message format : `<type>(<scope>): <subject>`
