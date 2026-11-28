@@ -14,6 +14,13 @@
       "sourceType": "github",
       "skillPath": "skills/setup-vitest-nextjs/SKILL.md",
       "computedHash": "036958c366e0a1f55787565fcfaf8002ea3747e7ff50f2c9bcba6d162a05c7e1"
+    },
+    "verify": {
+      "source": "codingthailand/my-agent-skills",
+      "commit": "a69a115238be8b0319f4a0fff83027aa7b49c5ab",
+      "sourceType": "github",
+      "skillPath": "skills/verify/SKILL.md",
+      "computedHash": "95527b2f6ad767e4ec49447e9ae6bbfc6d335d48732da40fc0b38c6add197328"
     }
   }
 }
