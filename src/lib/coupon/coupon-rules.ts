@@ -1,10 +1,10 @@
-import { appError } from "@/lib/shared/errors"
-import { err, ok, type Result } from "@/lib/shared/result"
-import type { Coupon } from "./coupon-types"
+import { appError } from "@/lib/shared/errors";
+import { err, ok, type Result } from "@/lib/shared/result";
+import type { Coupon } from "./coupon-types";
 
 /** "  welcome20 " → "WELCOME20" (pure) */
 export function normalizeCouponCode(raw: string): string {
-  return raw.trim().toUpperCase()
+  return raw.trim().toUpperCase();
 }
 
 /**
@@ -12,9 +12,9 @@ export function normalizeCouponCode(raw: string): string {
  * แยกออกจากการค้น DB เพื่อให้เทสต์ทุกกรณีได้โดยไม่ต้องมีฐานข้อมูล
  */
 export function checkCouponUsable(coupon: Coupon | null): Result<Coupon> {
-  if (!coupon) return err(appError("COUPON_NOT_FOUND"))
-  if (!coupon.isActive) return err(appError("COUPON_INACTIVE"))
-  return ok(coupon)
+  if (!coupon) return err(appError("COUPON_NOT_FOUND"));
+  if (!coupon.isActive) return err(appError("COUPON_INACTIVE"));
+  return ok(coupon);
 }
 
 /**
@@ -26,18 +26,18 @@ export function checkCouponUsable(coupon: Coupon | null): Result<Coupon> {
  */
 export function calculateDiscount(
   coupon: Pick<Coupon, "type" | "value" | "maxDiscountSatang">,
-  subtotalSatang: number
+  subtotalSatang: number,
 ): number {
-  if (subtotalSatang <= 0) return 0
+  if (subtotalSatang <= 0) return 0;
 
   let discount =
     coupon.type === "PERCENT"
       ? Math.floor((subtotalSatang * coupon.value) / 100)
-      : coupon.value
+      : coupon.value;
 
   if (coupon.type === "PERCENT" && coupon.maxDiscountSatang !== null) {
-    discount = Math.min(discount, coupon.maxDiscountSatang)
+    discount = Math.min(discount, coupon.maxDiscountSatang);
   }
 
-  return Math.max(0, Math.min(discount, subtotalSatang))
+  return Math.max(0, Math.min(discount, subtotalSatang));
 }

@@ -12,8 +12,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "npm run format",
-            "timeout": 5
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/format-file.mjs\"",
+            "timeout": 30
           }
         ]
       }
