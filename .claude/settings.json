@@ -4,5 +4,19 @@
   "effortLevel": "medium",
   "permissions": {
     "defaultMode": "plan"
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npm run format",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
   }
 }
