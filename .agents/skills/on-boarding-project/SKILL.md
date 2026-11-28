@@ -99,22 +99,22 @@ npx tsc --noEmit
 
 ## บัญชีทดสอบหลัง seed (รหัสผ่าน `password123` ทุกบัญชี)
 
-| อีเมล | บทบาท |
-|---|---|
-| `admin@example.com` | แอดมิน เข้า `/admin` ได้ |
-| `user@example.com` | ซื้อคอร์ส React ไว้ 2 วันก่อน เรียนไป 1 บท (ยังขอคืนเงินได้) |
-| `student01…20@example.com` | ลูกค้าที่มีประวัติการสั่งซื้อ |
+| อีเมล                       | บทบาท                                             |
+| -------------------------- | ------------------------------------------------- |
+| `admin@example.com`        | แอดมิน เข้า `/admin` ได้                             |
+| `user@example.com`         | ซื้อคอร์ส React ไว้ 2 วันก่อน เรียนไป 1 บท (ยังขอคืนเงินได้) |
+| `student01…20@example.com` | ลูกค้าที่มีประวัติการสั่งซื้อ                                |
 
 ## ปัญหาที่เจอบ่อย
 
-| อาการ | สาเหตุ / วิธีแก้ |
-|---|---|
-| `You are using the default secret` ตอน build | ยังไม่ได้ตั้ง `BETTER_AUTH_SECRET` (ขั้น 3) |
-| `Invalid origin` ตอน login | `BETTER_AUTH_URL` ไม่ตรงกับพอร์ตที่รัน |
-| `Could not locate the bindings file` (better-sqlite3) | install script ถูกข้าม ดู `npm install-scripts ls` แล้ว approve + `npm rebuild` (ขั้น 4) |
-| import `generated/prisma` ไม่เจอ | ยังไม่ได้ `npx prisma generate` |
-| `no such table` | ยังไม่ได้ `npx prisma db push` หรือแก้ schema แล้วยังไม่ push ใหม่ |
-| หน้า `/admin` เข้าไม่ได้ | ใช้ `admin@example.com` หรือแก้ `role` เป็น `admin` ผ่าน `npx prisma studio` แล้ว logout/login ใหม่ |
+| อาการ                                                 | สาเหตุ / วิธีแก้                                                                                 |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `You are using the default secret` ตอน build          | ยังไม่ได้ตั้ง `BETTER_AUTH_SECRET` (ขั้น 3)                                                         |
+| `Invalid origin` ตอน login                            | `BETTER_AUTH_URL` ไม่ตรงกับพอร์ตที่รัน                                                             |
+| `Could not locate the bindings file` (better-sqlite3) | install script ถูกข้าม ดู `npm install-scripts ls` แล้ว approve + `npm rebuild` (ขั้น 4)           |
+| import `generated/prisma` ไม่เจอ                       | ยังไม่ได้ `npx prisma generate`                                                                 |
+| `no such table`                                       | ยังไม่ได้ `npx prisma db push` หรือแก้ schema แล้วยังไม่ push ใหม่                                    |
+| หน้า `/admin` เข้าไม่ได้                                  | ใช้ `admin@example.com` หรือแก้ `role` เป็น `admin` ผ่าน `npx prisma studio` แล้ว logout/login ใหม่ |
 
 ## สรุปท้าย on-boarding
 

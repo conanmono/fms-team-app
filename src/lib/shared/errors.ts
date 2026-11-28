@@ -44,21 +44,21 @@ export const ERROR_MESSAGES = {
 
   // ทั่วไป
   VALIDATION_FAILED: "ข้อมูลไม่ถูกต้อง",
-} as const
+} as const;
 
-export type ErrorCode = keyof typeof ERROR_MESSAGES
+export type ErrorCode = keyof typeof ERROR_MESSAGES;
 
 export type AppError = {
-  code: ErrorCode
-  message: string
-  fieldErrors?: Record<string, string[]>
-}
+  code: ErrorCode;
+  message: string;
+  fieldErrors?: Record<string, string[]>;
+};
 
 export function appError(
   code: ErrorCode,
-  fieldErrors?: Record<string, string[]>
+  fieldErrors?: Record<string, string[]>,
 ): AppError {
   return fieldErrors
     ? { code, message: ERROR_MESSAGES[code], fieldErrors }
-    : { code, message: ERROR_MESSAGES[code] }
+    : { code, message: ERROR_MESSAGES[code] };
 }

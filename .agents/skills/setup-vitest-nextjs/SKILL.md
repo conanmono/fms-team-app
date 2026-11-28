@@ -40,13 +40,13 @@ Skill นี้พาติดตั้ง **Vitest** คู่กับ **React
 npm install -D vitest @vitejs/plugin-react jsdom @testing-library/react @testing-library/dom
 ```
 
-| Package | หน้าที่ |
-| --- | --- |
-| `vitest` | ตัวรันเทส |
-| `@vitejs/plugin-react` | ให้ Vitest เข้าใจ JSX / React |
-| `jsdom` | จำลอง browser (DOM) ให้เทสรันได้ใน Node |
+| Package                  | หน้าที่                                           |
+| ------------------------ | ---------------------------------------------- |
+| `vitest`                 | ตัวรันเทส                                        |
+| `@vitejs/plugin-react`   | ให้ Vitest เข้าใจ JSX / React                    |
+| `jsdom`                  | จำลอง browser (DOM) ให้เทสรันได้ใน Node           |
 | `@testing-library/react` | render component แล้วค้นหา element แบบที่ผู้ใช้มองเห็น |
-| `@testing-library/dom` | ตัวช่วยค้นหา DOM (peer dependency ของตัวบน) |
+| `@testing-library/dom`   | ตัวช่วยค้นหา DOM (peer dependency ของตัวบน)        |
 
 > **ไม่ต้องติดตั้ง `vite-tsconfig-paths`** (เอกสาร Next.js ยังแนะนำอยู่)
 > Vitest 5 ใช้ Vite 8 ที่อ่าน path alias จาก `tsconfig.json` ได้เองแล้ว
@@ -72,8 +72,8 @@ npm install -D @types/node@^<major ของ node> vitest @vitejs/plugin-react j
 **`vitest.config.mts`** (TypeScript)
 
 ```ts
-import { defineConfig } from 'vitest/config'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
@@ -81,21 +81,21 @@ export default defineConfig({
     tsconfigPaths: true, // ให้ import '@/...' ใช้ได้ในเทส
   },
   test: {
-    environment: 'jsdom',
-    setupFiles: ['./vitest.setup.ts'],
+    environment: "jsdom",
+    setupFiles: ["./vitest.setup.ts"],
   },
-})
+});
 ```
 
 **`vitest.setup.ts`**
 
 ```ts
-import { afterEach } from 'vitest'
-import { cleanup } from '@testing-library/react'
+import { afterEach } from "vitest";
+import { cleanup } from "@testing-library/react";
 
 afterEach(() => {
-  cleanup()
-})
+  cleanup();
+});
 ```
 
 ทำไมต้องมีไฟล์ setup:
@@ -128,16 +128,16 @@ npm pkg set scripts.test=vitest
 **`__tests__/page.test.tsx`**
 
 ```tsx
-import { expect, test } from 'vitest'
-import { render, screen } from '@testing-library/react'
-import Page from '@/app/page'
+import { expect, test } from "vitest";
+import { render, screen } from "@testing-library/react";
+import Page from "@/app/page";
 
-test('หน้า Home แสดงหัวข้อ h1', () => {
-  render(<Page />)
+test("หน้า Home แสดงหัวข้อ h1", () => {
+  render(<Page />);
   expect(
-    screen.getByRole('heading', { level: 1, name: '<ข้อความใน h1 จริง>' }),
-  ).toBeDefined()
-})
+    screen.getByRole("heading", { level: 1, name: "<ข้อความใน h1 จริง>" }),
+  ).toBeDefined();
+});
 ```
 
 ข้อควรปรับก่อนใช้:
@@ -167,15 +167,15 @@ npx vitest run
 
 ถ้ายังไม่ผ่าน ให้ดูตารางนี้ก่อน
 
-| อาการ | สาเหตุที่พบบ่อย | วิธีแก้ |
-| --- | --- | --- |
-| `ERESOLVE ... @types/node` ตอนติดตั้ง | `@types/node` เก่ากว่าที่ Vitest ต้องการ | อัปเกรด `@types/node` (ขั้นที่ 1) |
-| `The plugin "vite-tsconfig-paths" is detected` | ใช้ plugin ตามเอกสารเก่า | ถอด plugin แล้วใช้ `resolve.tsconfigPaths: true` |
-| `Failed to resolve import "@/..."` | ไม่ได้เปิด `tsconfigPaths` | ใส่ `resolve.tsconfigPaths: true` |
-| `document is not defined` | ไม่ได้ตั้ง environment | ใส่ `environment: 'jsdom'` |
-| `Found multiple elements with the role ...` | DOM ไม่ถูกล้างระหว่างเทส | เพิ่ม `vitest.setup.ts` ที่เรียก `cleanup()` |
-| `Unable to find role="heading"` | ข้อความ/ระดับหัวข้อไม่ตรง | เปิด `page.tsx` ดูของจริงแล้วแก้เทส |
-| เทส `async` component ไม่ผ่าน | Vitest ไม่รองรับ | ใช้ E2E test แทน |
+| อาการ                                          | สาเหตุที่พบบ่อย                         | วิธีแก้                                           |
+| ---------------------------------------------- | ----------------------------------- | ---------------------------------------------- |
+| `ERESOLVE ... @types/node` ตอนติดตั้ง             | `@types/node` เก่ากว่าที่ Vitest ต้องการ | อัปเกรด `@types/node` (ขั้นที่ 1)                   |
+| `The plugin "vite-tsconfig-paths" is detected` | ใช้ plugin ตามเอกสารเก่า              | ถอด plugin แล้วใช้ `resolve.tsconfigPaths: true` |
+| `Failed to resolve import "@/..."`             | ไม่ได้เปิด `tsconfigPaths`             | ใส่ `resolve.tsconfigPaths: true`               |
+| `document is not defined`                      | ไม่ได้ตั้ง environment                  | ใส่ `environment: 'jsdom'`                      |
+| `Found multiple elements with the role ...`    | DOM ไม่ถูกล้างระหว่างเทส                | เพิ่ม `vitest.setup.ts` ที่เรียก `cleanup()`        |
+| `Unable to find role="heading"`                | ข้อความ/ระดับหัวข้อไม่ตรง                | เปิด `page.tsx` ดูของจริงแล้วแก้เทส                 |
+| เทส `async` component ไม่ผ่าน                    | Vitest ไม่รองรับ                      | ใช้ E2E test แทน                                |
 
 ---
 

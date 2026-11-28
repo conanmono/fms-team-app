@@ -2,33 +2,41 @@
  * สร้างรูปปกคอร์สเป็น SVG ใน public/course-image/ (รันครั้งเดียว ผลลัพธ์ commit ไว้แล้ว)
  *   npx tsx scripts/generate-course-images.ts
  */
-import { mkdirSync, writeFileSync } from "node:fs"
-import { join } from "node:path"
-import { CATEGORIES, COURSES } from "../prisma/seed-data/catalog"
+import { mkdirSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+import { CATEGORIES, COURSES } from "../prisma/seed-data/catalog";
 
-const outDir = join(process.cwd(), "public", "course-image")
-mkdirSync(outDir, { recursive: true })
+const outDir = join(process.cwd(), "public", "course-image");
+mkdirSync(outDir, { recursive: true });
 
 function escape(text: string): string {
-  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
 
 /** ตัดชื่อคอร์สเป็นไม่เกิน 2 บรรทัด */
 function lines(title: string): string[] {
-  const words = title.replace(/\s*\(.*\)$/, "").split(" ")
-  const result: string[] = [""]
+  const words = title.replace(/\s*\(.*\)$/, "").split(" ");
+  const result: string[] = [""];
   for (const word of words) {
-    const current = result[result.length - 1]
-    if ((current + " " + word).trim().length > 20 && current && result.length < 2) result.push(word)
-    else result[result.length - 1] = (current + " " + word).trim()
+    const current = result[result.length - 1];
+    if (
+      (current + " " + word).trim().length > 20 &&
+      current &&
+      result.length < 2
+    )
+      result.push(word);
+    else result[result.length - 1] = (current + " " + word).trim();
   }
-  return result
+  return result;
 }
 
 for (const course of COURSES) {
-  const category = CATEGORIES.find((item) => item.slug === course.category)!
-  const [from, to] = category.color
-  const titleLines = lines(course.title)
+  const category = CATEGORIES.find((item) => item.slug === course.category)!;
+  const [from, to] = category.color;
+  const titleLines = lines(course.title);
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
@@ -47,13 +55,13 @@ for (const course of COURSES) {
   ${titleLines
     .map(
       (line, i) =>
-        `<text x="48" y="${200 + i * 56 - (titleLines.length - 1) * 28}" font-family="system-ui, sans-serif" font-size="46" font-weight="700" fill="#ffffff">${escape(line)}</text>`
+        `<text x="48" y="${200 + i * 56 - (titleLines.length - 1) * 28}" font-family="system-ui, sans-serif" font-size="46" font-weight="700" fill="#ffffff">${escape(line)}</text>`,
     )
     .join("\n  ")}
   <text x="48" y="318" font-family="system-ui, sans-serif" font-size="18" fill="#ffffff" fill-opacity="0.8">CodingThailand Academy</text>
 </svg>
-`
-  writeFileSync(join(outDir, `${course.slug}.svg`), svg)
+`;
+  writeFileSync(join(outDir, `${course.slug}.svg`), svg);
 }
 
-console.log(`สร้างรูปปก ${COURSES.length} รูปที่ ${outDir}`)
+console.log(`สร้างรูปปก ${COURSES.length} รูปที่ ${outDir}`);

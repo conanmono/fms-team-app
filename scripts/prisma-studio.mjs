@@ -11,29 +11,31 @@
  *
  * หมายเหตุ: ไม่ใช้ pathToFileURL เพราะจะแปลงช่องว่างเป็น %20 ซึ่ง Studio ไม่ decode กลับ
  */
-import "dotenv/config"
-import { spawn } from "node:child_process"
-import { createRequire } from "node:module"
-import { resolve, sep } from "node:path"
+import "dotenv/config";
+import { spawn } from "node:child_process";
+import { createRequire } from "node:module";
+import { resolve, sep } from "node:path";
 
-const databaseUrl = process.env.DATABASE_URL
+const databaseUrl = process.env.DATABASE_URL;
 if (!databaseUrl) {
-  console.error("ไม่พบ DATABASE_URL — สร้างไฟล์ .env จาก .env.example ก่อน")
-  process.exit(1)
+  console.error("ไม่พบ DATABASE_URL — สร้างไฟล์ .env จาก .env.example ก่อน");
+  process.exit(1);
 }
 
-let studioUrl = databaseUrl
+let studioUrl = databaseUrl;
 if (databaseUrl.startsWith("file:") && !databaseUrl.startsWith("file://")) {
   const absolutePath = resolve(process.cwd(), databaseUrl.slice("file:".length))
     .split(sep)
-    .join("/")
-  studioUrl = `file://${absolutePath.startsWith("/") ? "" : "/"}${absolutePath}`
+    .join("/");
+  studioUrl = `file://${absolutePath.startsWith("/") ? "" : "/"}${absolutePath}`;
 }
 
-const prismaCli = createRequire(import.meta.url).resolve("prisma/build/index.js")
+const prismaCli = createRequire(import.meta.url).resolve(
+  "prisma/build/index.js",
+);
 const child = spawn(
   process.execPath,
   [prismaCli, "studio", "--url", studioUrl, ...process.argv.slice(2)],
   { stdio: "inherit" },
-)
-child.on("exit", (code) => process.exit(code ?? 0))
+);
+child.on("exit", (code) => process.exit(code ?? 0));
